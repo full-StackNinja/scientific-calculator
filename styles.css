@@ -1,0 +1,72 @@
+html{
+    font-size: 16px;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    background-color: #fffffff3;
+    padding: 0;
+    margin: 0;
+}
+header{
+    font-size: 2rem;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 700;
+    margin: 50px auto;
+}
+#display{
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid #999999;
+    height: 70px;
+    width: 600px;
+    border-radius: 10px;
+    text-align: end;
+    padding-right: 10px;
+    font-size: 24px;
+    margin: 10px auto;
+}
+#display:hover{
+    box-shadow: 0 -1px  #999999;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+.keypad{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 600px;
+    margin: 10px auto;
+    gap: 5px;
+    padding: 0;
+}
+.keypad > button{
+    flex: 1 1 auto;
+    height: 40px;
+    width: 80px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #f8f8f8;
+    border-radius:  5px;
+}
+.keypad > .function-key, .operator{
+    background-color: #cac9c9;
+}
+.function-key.equal{
+    background-color: rgb(29, 154, 238);
+    color: #f8f8f8;
+}
+.digit.dot{
+    font-weight: 700;
+}
+button:active{
+    border: 1px solid #888888;
+    box-shadow: 0 0 5px #999999;
+}
+
