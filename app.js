@@ -117,6 +117,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
     resetParameters();
   }
 
+  function getXFactorial(){
+    let inputNum = Number(input.value);
+    let x = inputNum;
+    let xFact = 1;
+    while(x>0){
+        xFact *=x;
+        x--;
+    }
+    input.value = `${inputNum}! = ${xFact}`;
+    save = `${inputNum}! = ${xFact}`;
+    resetParameters();
+  }
+
   let displayString = "";
   let numString = "";
   const displayNumFunc= function () {
@@ -132,6 +145,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const equalKey = document.querySelector(".equal");
   const clear = document.querySelector(".clear");
   const ansKey = document.querySelector(".ans");
+  const xFactorial = document.querySelector(".x-factorial");
 
   // Add event listener to number keys on "click"...
   digits.forEach((digit) => digit.addEventListener("click", displayNumFunc));
@@ -141,4 +155,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
   equalKey.addEventListener("click", equalKeyFunc);
   clear.addEventListener("click", clearFunc)
   ansKey.addEventListener("click", ansKeyFunc);
+  xFactorial.addEventListener("click", getXFactorial);
 })
