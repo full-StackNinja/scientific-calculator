@@ -108,7 +108,29 @@ document.addEventListener("DOMContentLoaded", ()=>{
   function ansKeyFunc(){
     input.value = save;
   }
-
+  
+  function getSqrtFunc(){
+    let expression = input.value;
+    let value =0;
+    if(isKeyPressedBefore){
+        secondNum = Number(numString);
+        value = getResultFunc(firstNum, operatorKey, secondNum);
+    }
+    else{
+        value = Number(input.value);
+    }
+    if(value>=0){
+        value = Math.sqrt(value)
+        input.value = `sqrt(${expression}) = ${value}`
+        save = `sqrt(${expression}) = ${value}`;
+        resetParameters();
+    }
+    else{
+        input.value = "Error";
+        resetParameters();
+    }
+  }
+  
   const equalKeyFunc = function () {
     secondNum = Number(numString);
     ans = getResultFunc(firstNum, operatorKey, secondNum);
@@ -154,6 +176,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const clear = document.querySelector(".clear");
   const ansKey = document.querySelector(".ans");
   const xFactorial = document.querySelector(".x-factorial");
+  const squareRoot = document.querySelector(".sqrt");
 
   // Add event listener to number keys on "click"...
   digits.forEach((digit) => digit.addEventListener("click", displayNumFunc));
@@ -164,4 +187,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
   clear.addEventListener("click", clearFunc)
   ansKey.addEventListener("click", ansKeyFunc);
   xFactorial.addEventListener("click", getXFactorial);
+  squareRoot.addEventListener("click", getSqrtFunc);
 })
