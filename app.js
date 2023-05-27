@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   function clearFunc(){
     input.value = 0;
+    save = 0;
     resetParameters();
   }
 
