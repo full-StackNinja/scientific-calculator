@@ -119,15 +119,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   function getXFactorial(){
     let inputNum = Number(input.value);
-    let x = inputNum;
-    let xFact = 1;
-    while(x>0){
-        xFact *=x;
-        x--;
+    if(inputNum == 0){
+        input.value = `${inputNum}! = 1`;
+        save = `${inputNum}! = ${1}`;
+        resetParameters();
+        return 0;
     }
-    input.value = `${inputNum}! = ${xFact}`;
-    save = `${inputNum}! = ${xFact}`;
-    resetParameters();
+    if(Number.isInteger(inputNum)){
+        let x = Math.abs(inputNum);
+        let xFact = inputNum/x;
+        while(x>0){
+            xFact *=x;
+            x--;
+        }
+        input.value = `${inputNum}! = ${xFact}`;
+        save = `${inputNum}! = ${xFact}`;
+        resetParameters();
+    }
   }
 
   let displayString = "";
