@@ -105,6 +105,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
     resetParameters();
   }
 
+  function ansKeyFunc(){
+    input.value = save;
+  }
+
   const equalKeyFunc = function () {
     secondNum = Number(numString);
     ans = getResultFunc(firstNum, operatorKey, secondNum);
@@ -127,6 +131,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const operators = document.querySelectorAll(".operator");
   const equalKey = document.querySelector(".equal");
   const clear = document.querySelector(".clear");
+  const ansKey = document.querySelector(".ans");
 
   // Add event listener to number keys on "click"...
   digits.forEach((digit) => digit.addEventListener("click", displayNumFunc));
@@ -135,4 +140,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
   );
   equalKey.addEventListener("click", equalKeyFunc);
   clear.addEventListener("click", clearFunc)
+  ansKey.addEventListener("click", ansKeyFunc);
 })
