@@ -5,11 +5,11 @@
     <meta content="viewport" width="device-width, initial-scale = 1.0" />
     <title>Scientific Calculator</title>
     <link rel="stylesheet" href="./styles.css" />
-    <script src="./app.js"></script>
+    <script src="./app.js" defer></script>
   </head>
   <body>
     <header class="header">Scientific Calculator</header>
-    <input type="number" id="display" value="0" />
+    <input type="text" id="display" value="0" />
     <div class="keypad">
       <button class="function-key rad">Rad</button>
       <button class="function-key deg">Deg</button>
@@ -22,10 +22,10 @@
       <button class="function-key sin">sin</button>
       <button class="function-key ln">ln</button>
       <button class="digit seven">7</button>
-      <button class="digit eight">8</button>
+      <button value="8" class="digit eight">8</button>
       <button class="digit nine">9</button>
-      <button class="operator divide">&divide;</button>
-      <button class="function-key pi">&Pi;</button>
+      <button class="operator divide">/</button>
+      <button class="function-key pi">&pi;</button>
       <button class="function-key cos">cos</button>
       <button class="function-key log">log</button>
       <button class="digit four">4</button>
@@ -38,10 +38,10 @@
       <button class="digit one">1</button>
       <button class="digit two">2</button>
       <button class="digit three">3</button>
-      <button class="operator minus">&minus;</button>
+      <button class="operator minus">-</button>
       <button class="function-key ans">Ans</button>
       <button class="function-key exp">EXP</button>
-      <button class="function-key x-power-y"><sub>x</sub>y</button>
+      <button class="function-key x-power-y">x<sup>y</sup></button>
       <button class="digit zero">0</button>
       <button class="digit dot">.</button>
       <button class="function-key equal">=</button>
