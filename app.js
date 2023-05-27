@@ -5,89 +5,125 @@ document.addEventListener("DOMContentLoaded", ()=>{
     Number((a + b).toFixed(3)): "Error";
   };
 
+//   Subtraction function
   const subtract = function (a, b) {
     return typeof a === "number" && typeof b === "number"?
     Number((a - b).toFixed(3)): "Error";
   };
+
+//   Multiplication function
   const multiply = function (a, b) {
     return typeof a === "number" && typeof b === "number"?
     Number((a * b).toFixed(3)): "Error";
   };
+
+//   Division function
   const divide = function (a, b) {
     return typeof a === "number" && typeof b === "number" && b !== 0?
     Number((a / b).toFixed(3)): "Error";
   };
-  
+
+  let result = 0;
+  const getResultFunc = function(a, key, b){
+    switch (key) {
+        case "+":
+            result = add(a, b);
+            console.log(`key is ${operatorKey} and operation is add`)
+            break;
+        case "-":
+            result = subtract(a, b);
+            console.log(`key is ${operatorKey} and operation is Subtract`);
+            break;
+    case "x":
+        result = multiply(a, b);
+        console.log(`key is ${operatorKey} and operation is Mult`);
+        break;
+    case "/":
+        result = divide(a, b);
+        console.log(`key is ${operatorKey} and operation is Divide`);
+    }
+    console.log(`result of ${firstNum} & ${secondNum} with key ${operatorKey} is ${result}`);
+    return result;
+  }
+
+  let save = 0;
+  let ans = 0;
+  let firstNum = 0;
+  let secondNum = 0; 
+  let operatorKey = "";
+  let isKeyPressedBefore= false;
+
+  const operatorKeyFunc = function () {
+    if(numString ===""){
+        isKeyPressedBefore = true;
+        firstNum = save;
+        operatorKey = this.textContent;
+        if(save===0){
+            displayString = `${save}` + `${operatorKey}`;
+            input.value = displayString;
+            return 0;
+        }
+        else{
+            displayString = `Ans` + `${operatorKey}`
+            input.value = displayString;
+            return 0;
+        }
+    }
+    displayString = displayString.concat(this.textContent);
+    input.value = displayString;
+    if(!isKeyPressedBefore){
+        isKeyPressedBefore = true;
+        operatorKey = this.textContent;
+        firstNum = Number(numString);
+        numString = "";
+    }
+    else{
+        isKeyPressedBefore = true;
+        secondNum = Number(numString);
+        numString = "";
+        console.log(`ans before ${ans}`);
+        ans = getResultFunc(firstNum, operatorKey, secondNum);
+        console.log(`ans after ${ans}`);
+        firstNum = ans;
+        operatorKey =this.textContent;
+    }
+  };
+
+  function resetParameters(){
+    numString = "";
+    displayString = "";
+    ans = 0;
+    firstNum = 0;
+    secondNum = 0;
+    operatorKey = "";
+    isKeyPressedBefore = false;
+  }
+  const equalKeyFunc = function () {
+    secondNum = Number(numString);
+    ans = getResultFunc(firstNum, operatorKey, secondNum);
+    input.value = ans;
+    save = ans;
+    resetParameters();
+  }
+
   let displayString = "";
   let numString = "";
-  let ans = 0;
-  let firstNum = ""; // initializing as a string to fulfill if condition in getResult Function
-  let secondNum = ""; // initializing as a string to fulfill if condition in getResult Function
-  let operatorSymbol = "";
-
-  const operatorFunc = function () {
-    operatorSymbol = this.textContent;
-    displayString = displayString.concat(operatorSymbol);
-    input.value = displayString;
-    numString = "";
-    firstNum = secondNum;
-    secondNum = "";
-  };
-  // const functionObject = {
-  //     '+': `${add}`,
-  //     "-": `${subtract}`,
-  //     "x": `${multiply}`,
-  //     "/": `${divide}`
-  // }
-  // TODO :
-  const getResult = function () {
-    console.log(
-      `firstNum is ${firstNum}, SecNum: ${secondNum}, operator: ${operatorSymbol}`
-    );
-    if (operatorSymbol === "") {
-      input.value = displayString;
-      return 0;
-    } else if (operatorSymbol !== "" && firstNum !== "" && secondNum !== "") {
-      switch (operatorSymbol) {
-        case "+":
-          ans = add(firstNum, secondNum);
-          break;
-        case "-":
-          ans = subtract(firstNum, secondNum);
-          break;
-        case "x":
-          ans = multiply(firstNum, secondNum);
-          break;
-        case "/":
-          ans = divide(firstNum, secondNum);
-      }
-    } else {
-      ans = "ERROR";
-    }
-    // Display the answer and reset all the variables...
-    input.value = ans;
-    firstNum = "0";
-    secondNum = "0";
-    displayString = "";
-    numString = "";
-    operatorSymbol = "";
-    ans = 0;
-  };
-  // display function will trigger on each key press of the whole keyboard
-  const displayNum = function () {
+  const displayNumFunc= function () {
     numString = numString.concat(this.textContent);
     displayString = displayString.concat(this.textContent);
     input.value = displayString;
-    secondNum = Number(numString);
   };
+
+// Access relevant buttons on keyboard
   const input = document.querySelector("#display");
   const digits = document.querySelectorAll(".digit");
   const operators = document.querySelectorAll(".operator");
   const equalKey = document.querySelector(".equal");
+
   // Add event listener to number keys on "click"...
-  digits.forEach((digit) => digit.addEventListener("click", displayNum));
+  digits.forEach((digit) => digit.addEventListener("click", displayNumFunc));
   operators.forEach((operator) =>
-    operator.addEventListener("click", operatorFunc)
+    operator.addEventListener("click", operatorKeyFunc)
   );
-  equalKey.addEventListener("click", getResult);
+  equalKey.addEventListener("click", equalKeyFunc);
 })
