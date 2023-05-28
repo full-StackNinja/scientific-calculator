@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let isNumberEnteredBefore = false;
 
   const operatorKeyFunc = function () {
+    isDotPresentInNumber = false;
     isNumberEnteredBefore = true;
     if(numString ===""){
         isKeyPressedBefore = true;
@@ -101,6 +102,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     isKeyPressedBefore = false;
     isNumberEnteredBefore= false;
     isXPowerYKeyPressed = false;
+    isDotPresentInNumber = false;
   }
 
   function clearFunc(){
@@ -214,6 +216,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   }
 
   let isXPowerYKeyPressed = false;
+
   function getXPowerY(){
     isXPowerYKeyPressed = true;
     firstNum = Number(input.value);
@@ -222,6 +225,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
     displayString = displayString.concat("^");
     input.value = displayString;
   }
+
+  let isDotPresentInNumber = false;
+
+  function getDotFunc(){
+    if(!isDotPresentInNumber){
+    isDotPresentInNumber = true;
+    numString = numString.concat(this.textContent);
+    console.log(this.textContent);
+    displayString = (input.value).concat(this.textContent);
+    input.value = displayString;
+    }
+}
 
 // Access relevant buttons on keyboard
   const input = document.querySelector("#display");
@@ -234,6 +249,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const squareRoot = document.querySelector(".sqrt");
   const pi = document.querySelector(".pi");
   const xPowerY = document.querySelector(".x-power-y");
+  const dot = document.querySelector(".dot");
 
 
   // Add event listener to number keys on "click"...
@@ -246,5 +262,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
   squareRoot.addEventListener("click", getSqrtFunc);
   pi.addEventListener("click", getPiFunc);
   xPowerY.addEventListener("click", getXPowerY)
+  dot.addEventListener("click", getDotFunc);
 
 })
