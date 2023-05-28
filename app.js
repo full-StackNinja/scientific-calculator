@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let isXPowerYKeyPressed = false;
   function getXPowerY(){
     isXPowerYKeyPressed = true;
-    firstNum = Number(numString);
+    firstNum = Number(input.value);
     numString = "";
     displayString = input.value;
     displayString = displayString.concat("^");
