@@ -238,13 +238,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
 }
 
-const functions = {};
+const keyboardNumKeys = {'1': "1", '2': "2", "3": "3", "4": "4", "5": "5", "6": "6", "7": "7", "8": "8", "9": "9", "0": "0"};
 
 function getKeyDownKey(e){
     if(e.key === 'Backspace'){
         displayString = displayString.slice(0, -1);
         input.value = displayString;
         numString = numString.slice(0, -1);
+    }
+    else if(e.key === `${keyboardNumKeys[e.key]}`){
+        displayString = input.value;
+        displayString = displayString.concat(e.key);
+        input.value = displayString;
+        numString = numString.concat(e.key);
     }
 }
 
