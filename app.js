@@ -254,6 +254,12 @@ function getKeyDownKey(e){
     }
 }
 
+function getPercentFunc(){
+    save = Number(input.value)/100;
+    input.value = save;
+    resetParameters();      
+}
+
 // Access relevant buttons on keyboard
   const input = document.querySelector("#display");
   const digits = document.querySelectorAll(".digit");
@@ -266,6 +272,7 @@ function getKeyDownKey(e){
   const pi = document.querySelector(".pi");
   const xPowerY = document.querySelector(".x-power-y");
   const dot = document.querySelector(".dot");
+  const percent = document.querySelector(".percent");
 
 
   // Add event listener to number keys on "click"...
@@ -280,5 +287,6 @@ function getKeyDownKey(e){
   xPowerY.addEventListener("click", getXPowerY)
   dot.addEventListener("click", getDotFunc);
   document.addEventListener("keydown", getKeyDownKey)
+  percent.addEventListener("click", getPercentFunc);
 
 })

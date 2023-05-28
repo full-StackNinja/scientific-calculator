@@ -47,7 +47,7 @@ input[type=number]::-webkit-outer-spin-button {
 .keypad > button{
     flex: 1 1 auto;
     height: 40px;
-    width: 80px;
+    width:95px;
     font-size: 16px;
     box-sizing: border-box;
     margin: 0;
@@ -59,6 +59,7 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #cac9c9;
 }
 .function-key.equal{
+    flex-grow: 100;
     background-color: rgb(29, 154, 238);
     color: #f8f8f8;
 }
