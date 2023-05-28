@@ -52,8 +52,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let secondNum = 0; 
   let operatorKey = "";
   let isKeyPressedBefore= false;
-
+  let isNumberEnteredBefore = false;
   const operatorKeyFunc = function () {
+    isNumberEnteredBefore = true;
     if(numString ===""){
         isKeyPressedBefore = true;
         firstNum = save;
@@ -97,6 +98,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     secondNum = 0;
     operatorKey = "";
     isKeyPressedBefore = false;
+    isNumberEnteredBefore= false;
   }
 
   function clearFunc(){
@@ -132,11 +134,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
   }
   
   const equalKeyFunc = function () {
+    if(!isNumberEnteredBefore){
+        input.value = numString;
+        save = Number(numString);
+    }
+    else{
     secondNum = Number(numString);
     ans = getResultFunc(firstNum, operatorKey, secondNum);
     input.value = ans;
     save = ans;
     resetParameters();
+    }
   }
 
   function getXFactorial(){
@@ -163,10 +171,30 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let displayString = "";
   let numString = "";
   const displayNumFunc= function () {
-    numString = numString.concat(this.textContent);
-    displayString = displayString.concat(this.textContent);
-    input.value = displayString;
+    if(!displayString.endsWith(`${pi.textContent}`)){
+        numString = numString.concat(this.textContent);
+        displayString = displayString.concat(this.textContent);
+        input.value = displayString;
+    }
   };
+
+  function getPiFunc(){
+    if (displayString === ""){
+        displayString = `${this.textContent}`;
+     }
+     else{
+        displayString = displayString.concat(this.textContent);
+     }
+     input.value = displayString;
+     if(numString === ""){
+        console.log(`Numstring is ${numString}`);
+        numString = numString.concat(Math.PI);
+        console.log(`Numstring is ${numString}`);
+     }
+     else{
+        numString = (Number(numString) * Math.PI).toFixed(3);
+     }
+  }
 
 // Access relevant buttons on keyboard
   const input = document.querySelector("#display");
@@ -177,6 +205,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const ansKey = document.querySelector(".ans");
   const xFactorial = document.querySelector(".x-factorial");
   const squareRoot = document.querySelector(".sqrt");
+  const pi = document.querySelector(".pi");
 
   // Add event listener to number keys on "click"...
   digits.forEach((digit) => digit.addEventListener("click", displayNumFunc));
@@ -188,4 +217,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
   ansKey.addEventListener("click", ansKeyFunc);
   xFactorial.addEventListener("click", getXFactorial);
   squareRoot.addEventListener("click", getSqrtFunc);
+  pi.addEventListener("click", getPiFunc);
 })
