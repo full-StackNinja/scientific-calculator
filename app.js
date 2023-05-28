@@ -238,6 +238,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
 }
 
+const functions = {};
+
+function getKeyDownKey(e){
+    if(e.key === 'Backspace'){
+        displayString = displayString.slice(0, -1);
+        input.value = displayString;
+        numString = numString.slice(0, -1);
+    }
+}
+
 // Access relevant buttons on keyboard
   const input = document.querySelector("#display");
   const digits = document.querySelectorAll(".digit");
@@ -263,5 +273,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
   pi.addEventListener("click", getPiFunc);
   xPowerY.addEventListener("click", getXPowerY)
   dot.addEventListener("click", getDotFunc);
+  document.addEventListener("keydown", getKeyDownKey)
 
 })
