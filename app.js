@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     return typeof a === "number" && typeof b === "number" && b !== 0?
     Number((a / b).toFixed(3)): "Error";
   };
-
+ 
   let result = 0;
   const getResultFunc = function(a, key, b){
     switch (key) {
@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   let operatorKey = "";
   let isKeyPressedBefore= false;
   let isNumberEnteredBefore = false;
+
   const operatorKeyFunc = function () {
     isNumberEnteredBefore = true;
     if(numString ===""){
@@ -99,6 +100,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     operatorKey = "";
     isKeyPressedBefore = false;
     isNumberEnteredBefore= false;
+    isXPowerYKeyPressed = false;
   }
 
   function clearFunc(){
@@ -134,9 +136,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
   }
   
   const equalKeyFunc = function () {
+    if(isXPowerYKeyPressed){
+        console.log("PowerkeyPressed");
+        isXPowerYKeyPressed = false;
+        secondNum = Number(numString);
+        console.log(firstNum, secondNum);
+        input.value = Math.pow(firstNum, secondNum);
+        save = Number(input.value);
+        resetParameters();
+        return 0;
+    }
     if(!isNumberEnteredBefore){
         input.value = numString;
         save = Number(numString);
+        resetParameters();
+        return 0;
+
     }
     else{
     secondNum = Number(numString);
@@ -144,6 +159,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     input.value = ans;
     save = ans;
     resetParameters();
+    return 0;
     }
   }
 
@@ -170,6 +186,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   let displayString = "";
   let numString = "";
+
   const displayNumFunc= function () {
     if(!displayString.endsWith(`${pi.textContent}`)){
         numString = numString.concat(this.textContent);
@@ -196,6 +213,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
      }
   }
 
+  let isXPowerYKeyPressed = false;
+  function getXPowerY(){
+    isXPowerYKeyPressed = true;
+    firstNum = Number(numString);
+    numString = "";
+    displayString = input.value;
+    displayString = displayString.concat("^");
+    input.value = displayString;
+  }
+
 // Access relevant buttons on keyboard
   const input = document.querySelector("#display");
   const digits = document.querySelectorAll(".digit");
@@ -206,16 +233,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const xFactorial = document.querySelector(".x-factorial");
   const squareRoot = document.querySelector(".sqrt");
   const pi = document.querySelector(".pi");
+  const xPowerY = document.querySelector(".x-power-y");
+
 
   // Add event listener to number keys on "click"...
   digits.forEach((digit) => digit.addEventListener("click", displayNumFunc));
-  operators.forEach((operator) =>
-    operator.addEventListener("click", operatorKeyFunc)
-  );
+  operators.forEach((operator) => operator.addEventListener("click", operatorKeyFunc));
   equalKey.addEventListener("click", equalKeyFunc);
   clear.addEventListener("click", clearFunc)
   ansKey.addEventListener("click", ansKeyFunc);
   xFactorial.addEventListener("click", getXFactorial);
   squareRoot.addEventListener("click", getSqrtFunc);
   pi.addEventListener("click", getPiFunc);
+  xPowerY.addEventListener("click", getXPowerY)
+
 })
